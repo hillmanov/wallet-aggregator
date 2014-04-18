@@ -1,0 +1,12 @@
+{
+  "name": "Wallet Aggregator",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "matches": ["https://wallet.google.com/merchant/pages/"],
+      "css": ["css/styles.css"],
+      "js": ["lib/jquery.min.js", "lib/lodash.min.js", "main.js"]
+    }
+  ]
+}
