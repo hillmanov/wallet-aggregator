@@ -9,5 +9,8 @@
       "css": ["css/styles.css"],
       "js": ["lib/jquery.min.js", "lib/angular.min.js", "lib/lodash.min.js", "lib/moment.min.js", "lib/vue.min.js", "main.js"]
     }
+  ],
+  "web_accessible_resources": [
+    "templates/*"
   ]
 }

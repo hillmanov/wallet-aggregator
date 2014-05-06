@@ -5,7 +5,7 @@ function WalletAggregatorCtrl($scope) {
       return {
           date:        $(row).find('.wallet-date-column > div').text(),
           status:      $(row).find('.wallet-status-column > img').attr('title'),
-          description: $(row).find('.wallet-description-column-shifted > div').text().split("(")[0].trim(),
+          nameOfApp:   $(row).find('.wallet-description-column-shifted > div').text().split("(")[0].trim(),
           total:       parseFloat($(row).find('.wallet-total-column > div').text().replace('$', ''))
         }
       });
@@ -20,10 +20,10 @@ function WalletAggregatorCtrl($scope) {
                               return {
                                 date: date,
                                 details: _(transactions)
-                                          .groupBy('description')
-                                          .map(function(transactionsForApp, description) {
+                                          .groupBy('nameOfApp')
+                                          .map(function(transactionsForApp, nameOfApp) {
                                             return {
-                                              description: description,
+                                              nameOfApp: nameOfApp,
                                               transactions: transactionsForApp,
                                               total: _.reduce(transactionsForApp, function(sum, transaction) {
                                                 return sum + transaction.total
@@ -42,10 +42,12 @@ function WalletAggregatorCtrl($scope) {
                             .value();
   }
    parseData($('body'));
+   console.log($scope.dashboardData);
 };
 
 $(document).ready(function() {
-  var dashboard =  $('<div id="wa-dashboard" ng-app="" ng-csp="" ng-controller="WalletAggregatorCtrl"><ul><li ng-repeat="item in dashboardData">{{item.date}}</li></div>');
-  $('.kd-content-sidebar').append(dashboard);
-  angular.bootstrap($("#wa-dashboard"));
+  $.get(chrome.extension.getURL('templates/list.html'), function(text) {
+    $('.kd-content-sidebar').append(text);
+    angular.bootstrap($("#wa-dashboard"));
+  });
 });
