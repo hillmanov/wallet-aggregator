@@ -1,14 +1,17 @@
 function WalletAggregatorCtrl($scope) {
+  var nextLink;
 
   function parseData(node) {
     var orders = $(node).find('.orderRow').map(function(index, row) {
       return {
           date:        $(row).find('.wallet-date-column > div').text(),
           status:      $(row).find('.wallet-status-column > img').attr('title'),
-          nameOfApp:   $(row).find('.wallet-description-column-shifted > div').text().split("(")[0].trim(),
+          nameOfApp:   $(row).find('.wallet-description-column-shifted > div').text().split("(")[0].trim().replace(/premium/i, ''),
           total:       parseFloat($(row).find('.wallet-total-column > div').text().replace('$', ''))
         }
       });
+    
+    nextLink = $(node).find('#purchaseOrderPager-pagerNextButton').attr('href');
 
     $scope.dashboardData = _(orders)
                             .groupBy('date')
@@ -41,8 +44,14 @@ function WalletAggregatorCtrl($scope) {
                             })
                             .value();
   }
-   parseData($('body'));
+   parseData($('.container'));
    console.log($scope.dashboardData);
+   $.get(nextLink, function(html) {
+      //debugger;
+      console.log($(html).find('.container'));
+      console.log(parseData($(html).find('.container')));
+      console.log($scope.dashboardData);
+    });
 };
 
 $(document).ready(function() {
