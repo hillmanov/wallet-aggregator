@@ -17,7 +17,9 @@ function WalletAggregatorCtrl($scope) {
                             .groupBy('date')
                             .map(function(transactions, date) {
                               transactions = _.filter(transactions, function(transaction) {
-                                return transaction.status != 'cancelled';
+                                return transaction.status != 'Canceled'
+                                       && 
+                                       (transaction.nameOfApp.indexOf('Test') == -1);
                               });
 
                               return {
@@ -45,9 +47,7 @@ function WalletAggregatorCtrl($scope) {
                             .value();
   }
    parseData($('.container'));
-   console.log($scope.dashboardData);
    $.get(nextLink, function(html) {
-      //debugger;
       console.log($(html).find('.container'));
       console.log(parseData($(html).find('.container')));
       console.log($scope.dashboardData);
@@ -60,3 +60,4 @@ $(document).ready(function() {
     angular.bootstrap($("#wa-dashboard"));
   });
 });
+
