@@ -1,0 +1,37 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   '-D',
+1 verbose cli   '//////////////////////////////////////////////////' ]
+2 info using npm@2.0.2
+3 info using node@v0.10.32
+4 verbose node symlink /usr/local/bin/node
+5 verbose readDependencies using package.json deps
+6 verbose cache add [ '//////////////////////////////////////////////////', null ]
+7 verbose cache add spec="//////////////////////////////////////////////////" args=["//////////////////////////////////////////////////",null]
+8 verbose parsed spec { raw: '//////////////////////////////////////////////////',
+8 verbose parsed spec   scope: null,
+8 verbose parsed spec   name: null,
+8 verbose parsed spec   rawSpec: '//////////////////////////////////////////////////',
+8 verbose parsed spec   spec: '/',
+8 verbose parsed spec   type: 'local' }
+9 verbose parsed spec { raw: '/',
+9 verbose parsed spec   scope: null,
+9 verbose parsed spec   name: null,
+9 verbose parsed spec   rawSpec: '/',
+9 verbose parsed spec   spec: '/',
+9 verbose parsed spec   type: 'local' }
+10 verbose stack Error: couldn't figure out how to install /
+10 verbose stack     at addNonLocal (/usr/local/lib/node_modules/npm/lib/cache.js:310:12)
+10 verbose stack     at /usr/local/lib/node_modules/npm/lib/cache.js:282:22
+10 verbose stack     at Object.oncomplete (evalmachine.<anonymous>:107:15)
+11 verbose cwd /Users/scott/projects/chrome-extensions/wallet-aggregator
+12 error Darwin 14.0.0
+13 error argv "node" "/usr/local/bin/npm" "install" "-D" "//////////////////////////////////////////////////"
+14 error node v0.10.32
+15 error npm  v2.0.2
+16 error couldn't figure out how to install /
+17 error If you need help, you may report this error at:
+17 error     <http://github.com/npm/npm/issues>
+18 verbose exit [ 1, true ]
