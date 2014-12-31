@@ -5,8 +5,8 @@ var services    = angular.module('walletAggregator.services', []),
     app         = angular.module('walletAggregator', ['walletAggregator.services', 'walletAggregator.controllers','walletAggregator.directives', 'walletAggregator.filters']);
 
 $(document).ready(function() {
-  $.get(chrome.extension.getURL('templates/list.html'), function(text) {
-    $('.kd-content-sidebar').append(text);
-    angular.bootstrap($('#wa-dashboard', ['walletAggregator']));
+  $.get(chrome.extension.getURL('templates/root.html'), function(html) {
+    $('#navigation').append(html);
+    angular.bootstrap($(".main-page"), ['walletAggregator']);
   });
 });

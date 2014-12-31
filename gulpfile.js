@@ -15,10 +15,11 @@ var path          = require('path'),
     base          = 'src',
     dest          = 'dist',
 
-    appLess       = applyPrefix(base, ['/less/main.less', '/less/**/*.less']),
+    appLess       = applyPrefix(base, ['/less/styles.less', '/less/**/*.less']),
     appJs         = applyPrefix(base, ['/js/app/*.js', '/js/app/angular/**/app.js', '/js/app/**/*.js', ]),
-    appJsLibFiles = applyPrefix(base, ['/js/lib/jquery.min.js', '/js/lib/angular.js', '/js/lib/**/*.js']),
+    appJsLibFiles = applyPrefix(base, ['/js/lib/jquery.min.js', '/js/lib/angular.min.js', '/js/lib/**/*.js']),
     appJadeFiles  = applyPrefix(base, ['/js/app/**/*.jade']),
+    assets        = applyPrefix(base, ['/manifest.json']),
 
     argv          = minimist(process.argv.slice(2)),
     compile       = argv.compile;
@@ -29,7 +30,7 @@ var path          = require('path'),
 gulp.task('default', function(cb) {
   runSequence(
     'clean',
-    ['scripts:app', 'scripts:app:lib', 'templates:app', 'less:app' ],
+    ['scripts:app', 'scripts:app:lib', 'templates:app', 'less:app', 'assets'],
     'run',
     cb
   );
@@ -41,22 +42,15 @@ gulp.task('clean', function(cb) {
 
 gulp.task('templates:app', function() {
   return gulp.src(appJadeFiles)
-          .pipe(jade({locals: {}}))
-          .pipe(templateCache({
-            "module": 'walletAggregator',
-            "root": '',
-            base: function(file) {
-              return 'templates/' + path.basename(file.relative);
-            }
-          }))
-          .pipe(gulp.dest(dest + '/templates/'));
+           .pipe(jade({locals: {}}))
+           .pipe(gulp.dest(dest));
 });
 
 gulp.task('scripts:app', function() {
   return gulp.src(appJs)
-          .pipe(ngAnnotate())
-          .pipe(concat('app.js'))
-          .pipe(gulp.dest(dest + '/js/'));
+           .pipe(ngAnnotate())
+           .pipe(concat('app.js'))
+           .pipe(gulp.dest(dest + '/js/'));
 });
 
 gulp.task('scripts:app:lib', function() {
@@ -67,8 +61,13 @@ gulp.task('scripts:app:lib', function() {
 
 gulp.task('less:app', function() {
   return gulp.src(appLess[0])
-            .pipe(less())
-            .pipe(gulp.dest(dest + '/css/'));
+           .pipe(less())
+           .pipe(gulp.dest(dest + '/css/'));
+});
+
+gulp.task('assets', function() {
+  return gulp.src(assets, { base: base })
+           .pipe(gulp.dest(dest));
 });
 
 gulp.task('run', function() {
@@ -82,6 +81,8 @@ gulp.task('run', function() {
   gulp.watch(_.last(appJs),         ['scripts:app']);
   gulp.watch(_.last(appJsLibFiles), ['scripts:app:lib']);
   gulp.watch(appLess,               ['less:app']);
+  gulp.watch(assets,                ['assets']);
+
 });
 
 function applyPrefix(prefix, patterns) {

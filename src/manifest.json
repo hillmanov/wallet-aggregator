@@ -7,7 +7,7 @@
     {
       "matches": ["https://wallet.google.com/merchant/pages/*"],
       "css": ["css/styles.css"],
-      "js": ["lib/jquery.min.js", "lib/angular.min.js", "lib/lodash.min.js", "lib/moment.min.js", "lib/papa-parse.min.js", "main.js", "controllers.js", "services.js"]
+      "js": ["js/lib.js", "js/app.js"]
     }
   ],
   "web_accessible_resources": [

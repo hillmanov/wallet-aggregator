@@ -1,0 +1,8 @@
+#wa-dashboard(ng-app='walletAggregator', ng-csp='', ng-controller='MainCtrl as aggregator')
+  .date-container(ng-repeat='bundle in dashboardData')
+    .date {{bundle.date}}
+      .break-down-container(ng-repeat='item in bundle.details')
+        .name-of-app {{item.nameOfApp}}
+          span.transaction-count ({{ item.transactions.length }})
+        .app-total App total: {{ item.total | currency }}
+      .day-total Day total: {{ bundle.total | currency  }}
