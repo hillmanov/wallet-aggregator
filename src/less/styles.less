@@ -1,34 +1,41 @@
-#wa-dashboard div {
-  margin-top: 5px;
+#wa-dashboard {
+  margin: 5px;
 
-  .date-container {
+  .time-period-container {
     border-bottom: 1px solid black;
     width: 100%;
-  }
+    
+    h1 {
+      font-size: 18px;
+      font-weight: normal;
+      margin-bottom: 3px;
+    }
 
-  .date {
-    font-weight: bold;
-  }
+    table {
+      width: 100%;
+      tr {
+        width: 100%;
 
-  .break-down-container {
+        td.app-name {
 
-  }
+        }
 
-  .name-of-app {
+        td.app-total {
+          align: right;
+        }
 
-  }
+        td.period-title {
+          font-weight: bold; 
+        }
 
-  .transaction-count {
+        td.period-total {
+          font-weight: bold; 
+          align: right;
+        }
 
-  }
+      }
+    }
 
-  .app-total {
-    margin-left: 10px;
-    text-align: right;
-  }
-
-  .day-total {
-    font-weight: bold;
   }
 }
 

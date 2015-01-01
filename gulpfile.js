@@ -43,7 +43,15 @@ gulp.task('clean', function(cb) {
 gulp.task('templates:app', function() {
   return gulp.src(appJadeFiles)
            .pipe(jade({locals: {}}))
-           .pipe(gulp.dest(dest));
+           .pipe(gulp.dest(dest))
+           .pipe(templateCache({
+            module: 'walletAggregator',
+            root: '',
+            base: function(file) {
+              return 'templates/' + path.basename(file.relative);
+            }
+          }))
+          .pipe(gulp.dest(dest + '/js/'));
 });
 
 gulp.task('scripts:app', function() {

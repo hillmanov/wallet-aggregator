@@ -29,7 +29,7 @@ services.factory('orders', function($q, db) {
       var $row = $(row);
       return {
         id:      $row.attr('id'),
-        appName: $row.find('.order-description > div').text(),
+        appName: $row.find('.order-description > div').text().split(/Premium|-/)[0].trim(), // Specific for my apps and their naming schemes
         total:   parseFloat($row.find('.order-total > .money-col > div').text().replace('$', '')),
         status:  $row.find('.status .status-value').first().text(),
         date:    moment(new Date($row.find('.order-date> .desktop-only').text())).format('YYYY-MM-DD')
