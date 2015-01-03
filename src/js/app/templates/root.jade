@@ -1,9 +1,18 @@
 #wa-dashboard(ng-app='walletAggregator', ng-csp='', ng-controller='MainCtrl as aggregator')
 
-  breakdown(bundle="aggregator.orderBreakdown.today",     title="Today",      ng-if="aggregator.orderBreakdown.today.apps.length")
-  breakdown(bundle="aggregator.orderBreakdown.yesterday", title="Yesterday",  ng-if="aggregator.orderBreakdown.yesterday.apps.length")
-  breakdown(bundle="aggregator.orderBreakdown.thisWeek",  title="This week",  ng-if="aggregator.orderBreakdown.thisWeek.apps.length")
-  breakdown(bundle="aggregator.orderBreakdown.lastWeek",  title="Last Week",  ng-if="aggregator.orderBreakdown.lastWeek.apps.length")
-  breakdown(bundle="aggregator.orderBreakdown.thisMonth", title="This month", ng-if="aggregator.orderBreakdown.thisMonth.apps.length")
-  breakdown(bundle="aggregator.orderBreakdown.lastMonth", title="Last Month", ng-if="aggregator.orderBreakdown.lastMonth.apps.length")
+  .aggregated-data(ng-if="aggregator.orderBreakdown")
+    breakdown(bundle="aggregator.orderBreakdown.today",     title="Today",      ng-if="aggregator.orderBreakdown.today.apps.length")
+    breakdown(bundle="aggregator.orderBreakdown.yesterday", title="Yesterday",  ng-if="aggregator.orderBreakdown.yesterday.apps.length")
+    breakdown(bundle="aggregator.orderBreakdown.thisWeek",  title="This week",  ng-if="aggregator.orderBreakdown.thisWeek.apps.length")
+    breakdown(bundle="aggregator.orderBreakdown.lastWeek",  title="Last Week",  ng-if="aggregator.orderBreakdown.lastWeek.apps.length")
+    breakdown(bundle="aggregator.orderBreakdown.thisMonth", title="This month", ng-if="aggregator.orderBreakdown.thisMonth.apps.length")
+    breakdown(bundle="aggregator.orderBreakdown.lastMonth", title="Last Month", ng-if="aggregator.orderBreakdown.lastMonth.apps.length")
 
+  .loading-container(ng-if="!aggregator.orderBreakdown")
+    .loading-indicator
+    .notification
+      span.label Pages downloaded:
+      span.value {{ aggregator.notifications.pageCount }}
+    .notification
+      span.label Orders processed:
+      span.value {{ aggregator.notifications.orderCount }}

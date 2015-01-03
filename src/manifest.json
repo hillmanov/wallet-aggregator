@@ -5,7 +5,7 @@
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "content_scripts": [
     {
-      "matches": ["https://wallet.google.com/merchant/pages/*"],
+      "matches": ["https://wallet.google.com/merchant/pages/*/purchaseorderlist*"],
       "css": ["css/styles.css"],
       "js": ["js/lib.js", "js/app.js", "js/templates.js"]
     }

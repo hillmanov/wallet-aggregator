@@ -3,6 +3,8 @@ services.factory('orders', function($q, db) {
   var ordersService         = {};
       finishedGettingOrders = false,
       orderIds              = null,
+      pageCount             = 0,
+      orderCount            = 0,
       today                 = moment().format('YYYY-MM-DD'),
       yesterday             = moment().subtract(1, 'day').format('YYYY-MM-DD'),
       startOfThisWeek       = moment().startOf('week').format('YYYY-MM-DD'),
@@ -23,7 +25,10 @@ services.factory('orders', function($q, db) {
   };
 
   ordersService.fetchAndStoreOrders = function(domNode, deferred) {
-    console.info("Fetching more orders...");
+    deferred.notify({
+      type: 'pageCount',
+      value: pageCount++
+    });
 
     var orders = _.map($(domNode).find('table tbody tr[id]'), function(row, index) {
       var $row = $(row);
@@ -43,6 +48,10 @@ services.factory('orders', function($q, db) {
                       finishedGettingOrders = true;
                       return false;
                     } else {
+                      deferred.notify({
+                        type: 'orderCount',
+                        value: orderCount++
+                      });
                       return db.executeSql('INSERT INTO orders(id, appName, total, status, date) VALUES (?, ?, ?, ?, ?)', [order.id, order.appName, order.total, order.status, order.date]);
                     }
                   })
