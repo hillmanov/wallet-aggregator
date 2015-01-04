@@ -3,13 +3,10 @@ app.directive('breakdown', function() {
     restrict: 'E',
     scope: {
       bundle: '=',
+      multiplier: '=',
       title: '@'
     },
     templateUrl: 'templates/breakdown.html',
-    link: function(scope, element, attrs) {
-
-      console.log(scope.bundle);
-
-    }
+    link: _.noop
   };
 });

@@ -1,12 +1,14 @@
 #wa-dashboard(ng-app='walletAggregator', ng-csp='', ng-controller='MainCtrl as aggregator')
 
   .aggregated-data(ng-if="aggregator.orderBreakdown")
-    breakdown(bundle="aggregator.orderBreakdown.today",     title="Today",      ng-if="aggregator.orderBreakdown.today.apps.length")
-    breakdown(bundle="aggregator.orderBreakdown.yesterday", title="Yesterday",  ng-if="aggregator.orderBreakdown.yesterday.apps.length")
-    breakdown(bundle="aggregator.orderBreakdown.thisWeek",  title="This week",  ng-if="aggregator.orderBreakdown.thisWeek.apps.length")
-    breakdown(bundle="aggregator.orderBreakdown.lastWeek",  title="Last Week",  ng-if="aggregator.orderBreakdown.lastWeek.apps.length")
-    breakdown(bundle="aggregator.orderBreakdown.thisMonth", title="This month", ng-if="aggregator.orderBreakdown.thisMonth.apps.length")
-    breakdown(bundle="aggregator.orderBreakdown.lastMonth", title="Last Month", ng-if="aggregator.orderBreakdown.lastMonth.apps.length")
+    input(type="checkbox", ng-model="aggregator.applyGooglesCut", ng-click="aggregator.toggleApplyGooglesCut()")
+    | Apply Google's cut
+    breakdown(bundle="aggregator.orderBreakdown.today",     multiplier="aggregator.multiplier", title="Today",      ng-if="aggregator.orderBreakdown.today.apps.length")
+    breakdown(bundle="aggregator.orderBreakdown.yesterday", multiplier="aggregator.multiplier", title="Yesterday",  ng-if="aggregator.orderBreakdown.yesterday.apps.length")
+    breakdown(bundle="aggregator.orderBreakdown.thisWeek",  multiplier="aggregator.multiplier", title="This week",  ng-if="aggregator.orderBreakdown.thisWeek.apps.length")
+    breakdown(bundle="aggregator.orderBreakdown.lastWeek",  multiplier="aggregator.multiplier", title="Last Week",  ng-if="aggregator.orderBreakdown.lastWeek.apps.length")
+    breakdown(bundle="aggregator.orderBreakdown.thisMonth", multiplier="aggregator.multiplier", title="This month", ng-if="aggregator.orderBreakdown.thisMonth.apps.length")
+    breakdown(bundle="aggregator.orderBreakdown.lastMonth", multiplier="aggregator.multiplier", title="Last Month", ng-if="aggregator.orderBreakdown.lastMonth.apps.length")
 
   .loading-container(ng-if="!aggregator.orderBreakdown")
     .loading-indicator

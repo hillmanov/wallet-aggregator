@@ -3,7 +3,7 @@
   table
     tr(ng-repeat='appResult in bundle.apps')
       td.app-name {{ appResult.appName}} ({{ appResult.count }})
-      td.app-total(align="right") {{ appResult.total | currency }}
+      td.app-total(align="right") {{ appResult.total * multiplier | currency }}
     tr
       td.period-title {{ title }} total:
-      td.period-total(align="right") {{ bundle.aggregate.total | currency  }}
+      td.period-total(align="right") {{ bundle.aggregate.total * multiplier | currency  }}

@@ -1,9 +1,17 @@
 controllers.controller('MainCtrl', function(orders) {
-  var self = this;
+  var self       = this,
+      googlesCut = 0.30;
 
   this.notifications = {
     pageCount: 0,
     orderCount: 0
+  };
+
+  this.multiplier      = (1.0 - googlesCut);
+  this.applyGooglesCut = true;
+
+  this.toggleApplyGooglesCut = function() {
+    this.multiplier = (this.multiplier === 1) ? (1.0 - googlesCut) : 1.0;
   };
 
   orders.getOrderBreakdown($('.orders'))
@@ -18,5 +26,6 @@ controllers.controller('MainCtrl', function(orders) {
         self.notifications[notification.type] = notification.value;
       }
     );
+
 });
 
